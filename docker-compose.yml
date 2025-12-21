@@ -1,0 +1,36 @@
+services:
+  web:
+    container_name: drf_web
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: ".docker/${PROCESS_ENV}/web/Dockerfile"
+    volumes:
+      - .:/web  # ソースコードをマウントしてホットリロード
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: >
+      sh -c "
+      if [ ! -f manage.py ]; then
+        django-admin startproject src .;
+      fi &&
+      python manage.py runserver 0.0.0.0:8000
+      "
+
+  db:
+    image: postgres:17.7-alpine
+    container_name: drf_db
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "${DATABASE_PORT}:5432"
+
+volumes:
+  pgdata:

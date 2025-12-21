@@ -1,0 +1,8 @@
+Django==5.2
+djangorestframework
+PyYAML
+Markdown
+Pygments
+django-filter
+django-guardian
+psycopg[binary]
