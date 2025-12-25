@@ -7,3 +7,4 @@ django-filter
 django-guardian
 psycopg[binary]
 djangorestframework-simplejwt
+drf-spectacular
