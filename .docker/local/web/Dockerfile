@@ -8,7 +8,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 # 必要なシステムパッケージインストール（例: psycopg2 用）
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential libpq-dev && \
+        build-essential libpq-dev git && \
     rm -rf /var/lib/apt/lists/*
 
 # 作業ディレクトリ作成
